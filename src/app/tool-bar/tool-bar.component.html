@@ -1,0 +1,23 @@
+<div class="tool-bar d-flex flex-column align-items-center">
+  <ng-container id="segmentToolButton">
+    <button *ngIf="compareWithCurrToolName(0)" [matMenuTriggerFor]="segmentMenu" mat-mini-fab color="accent">
+      <mat-icon>edit</mat-icon>
+    </button>
+    <button *ngIf="!compareWithCurrToolName(0)" [matMenuTriggerFor]="segmentMenu" mat-icon-button color="accent">
+      <mat-icon>edit</mat-icon>
+    </button>
+  </ng-container>
+  <ng-container id="segmentToolMenu">
+    <mat-menu #segmentMenu="matMenu">
+      <button mat-menu-item (click)="selectSegmentTool()">
+        <span>Algorithm 1</span>
+      </button>
+      <button mat-menu-item (click)="selectSegmentTool()">
+        <span>Algorithm 2</span>
+      </button>
+      <button mat-menu-item (click)="selectSegmentTool()">
+        <span>Algorithm 3</span>
+      </button>
+    </mat-menu>
+  </ng-container>
+</div>

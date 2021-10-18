@@ -1,0 +1,7 @@
+.tool-bar {
+  padding: 5px 0px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 50px;
+}

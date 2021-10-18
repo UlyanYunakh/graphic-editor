@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { ITool } from '../interfaces/itool';
+import { CurrentToolService } from '../services/current-tool.service';
 
 @Component({
   selector: 'app-header',
@@ -6,10 +8,18 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./header.component.css']
 })
 export class HeaderComponent implements OnInit {
+  tool: ITool | undefined;
 
-  constructor() { }
+  constructor(
+    private _currTool: CurrentToolService
+  ) { }
 
   ngOnInit(): void {
+    this._currTool.getCurrToolSubject.subscribe(
+      newTool => {
+        this.tool = newTool;
+      }
+    );
   }
 
 }

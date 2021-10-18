@@ -1,1 +1,5 @@
-<mat-toolbar class="header">Header</mat-toolbar>
+<mat-toolbar class="header">
+  <div *ngIf="tool">
+    {{tool.id}}
+  </div>
+</mat-toolbar>
