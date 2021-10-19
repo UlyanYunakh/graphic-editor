@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ITool } from '../interfaces/itool';
+import { DummyAlgorithm } from '../models/dummy-algorithm';
 import { SegmentTool } from '../models/segment-tool';
 import { CurrentToolService } from '../services/current-tool.service';
 
@@ -22,8 +23,8 @@ export class ToolBarComponent implements OnInit {
     return this.selectedTool ? this.selectedTool.id == id : false;
   }
 
-  selectSegmentTool(): void {
-    this.selectedTool = new SegmentTool();
+  selectSegmentTool(name: string): void {
+    this.selectedTool = new SegmentTool(new DummyAlgorithm(name));
     this.setTool(this.selectedTool);
   }
 

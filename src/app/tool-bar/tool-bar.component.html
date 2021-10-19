@@ -9,13 +9,13 @@
   </ng-container>
   <ng-container id="segmentToolMenu">
     <mat-menu #segmentMenu="matMenu">
-      <button mat-menu-item (click)="selectSegmentTool()">
+      <button mat-menu-item (click)="selectSegmentTool('DummyAlgorithm1')">
         <span>Algorithm 1</span>
       </button>
-      <button mat-menu-item (click)="selectSegmentTool()">
+      <button mat-menu-item (click)="selectSegmentTool('DummyAlgorithm2')">
         <span>Algorithm 2</span>
       </button>
-      <button mat-menu-item (click)="selectSegmentTool()">
+      <button mat-menu-item (click)="selectSegmentTool('DummyAlgorithm3')">
         <span>Algorithm 3</span>
       </button>
     </mat-menu>
