@@ -16,10 +16,14 @@ export class SegmentTool implements ITool {
 
   draw(args: any[]): void {
     // this.algorithm.compute(args);
-
+    var k = 10;
     // for example purpose only:
-    Array.from(Array(400).keys()).forEach(x => {
-      this.canvasService.fillPixel(args[0] + x, args[1] + x);
+    Array.from(Array(40).keys()).forEach(x => {
+      for(var i=0;i<k;i++){
+        for(var j=0;j<k;j++){
+          this.canvasService.fillPixel(args[0] + k*x + j, args[1] + k*x + i);
+        }
+      }
     });
   }
 }
