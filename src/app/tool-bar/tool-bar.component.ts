@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ITool } from '../interfaces/itool';
 import { DummyAlgorithm } from '../models/dummy-algorithm';
 import { SegmentTool } from '../models/segment-tool';
+import { CanvasService } from '../services/canvas.service';
 import { CurrentToolService } from '../services/current-tool.service';
 
 @Component({
@@ -13,7 +14,8 @@ export class ToolBarComponent implements OnInit {
   selectedTool: ITool | undefined;
 
   constructor(
-    private _toolService: CurrentToolService
+    private _toolService: CurrentToolService,
+    private _canvasService: CanvasService
   ) { }
 
   ngOnInit(): void {
@@ -24,7 +26,7 @@ export class ToolBarComponent implements OnInit {
   }
 
   selectSegmentTool(name: string): void {
-    this.selectedTool = new SegmentTool(new DummyAlgorithm(name));
+    this.selectedTool = new SegmentTool(new DummyAlgorithm(name), this._canvasService);
     this.setTool(this.selectedTool);
   }
 
