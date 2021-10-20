@@ -16,15 +16,12 @@ export class SegmentTool implements ITool {
     this.draw([7, 1, 18, 3]);
 
     // this.draw([10, 10, 20, 20]);
-    this.drawPixels([10, 10, 40, 40], 5);
+    this.draw([10, 10, 40, 40], 5);
   }
 
-  draw(args: any[]): void {
-    this.algorithm.compute(args, this.drawOnCanvas);
-  }
+  draw(args: any[], pixelsNumber?: number): void {
+    if (pixelsNumber) this.canvasService.clearCanvas();
 
-  drawPixels(args: any[], pixelsNumber: number): void {
-    this.canvasService.clearCanvas();
     this.algorithm.compute(args, this.drawOnCanvas, pixelsNumber);
   }
 
