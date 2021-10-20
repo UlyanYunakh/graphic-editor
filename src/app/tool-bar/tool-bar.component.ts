@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ITool } from '../interfaces/itool';
-import { DummyAlgorithm } from '../models/dummy-algorithm';
+import { CDAAlgorithm } from '../models/cda-algorithm';
 import { SegmentTool } from '../models/segment-tool';
 import { CanvasService } from '../services/canvas.service';
 import { CurrentToolService } from '../services/current-tool.service';
@@ -26,8 +26,15 @@ export class ToolBarComponent implements OnInit {
   }
 
   selectSegmentTool(name: string): void {
-    this.selectedTool = new SegmentTool(new DummyAlgorithm(name), this._canvasService);
-    this.setTool(this.selectedTool);
+    switch (name) {
+      case 'CDA':
+        this.selectedTool = new SegmentTool(new CDAAlgorithm(), this._canvasService);
+        this.setTool(this.selectedTool);
+        break;
+      default:
+        this.selectedTool = new SegmentTool(new CDAAlgorithm(), this._canvasService);
+        this.setTool(this.selectedTool);
+    }
   }
 
   private setTool(tool: ITool): void {

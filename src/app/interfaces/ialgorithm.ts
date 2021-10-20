@@ -1,5 +1,5 @@
 export interface IAlgorithm {
   name: string;
   
-  compute(agrs: []): void;
+  compute(agrs: any[], drawFunc: Function, pixelsNumber?: number): void;
 }
