@@ -15,7 +15,7 @@ export class CanvasService {
 
   fillPixel(x: number, y: number): void {
     if (this.context) {
-      this.context.fillRect(x, y, 1, 1);
+      this.context.fillRect(x * 10, y * 10, 10, 10);
     }
   }
 }
