@@ -22,13 +22,13 @@ export class BresenhamAlgorithm implements IAlgorithm {
     }
 
     for (var i = 0; i < iterNumber; i++) {
-      drawFunc([x1, y1]);
       if (e >= 0) {
         e -= 2 * delx;
         y1 += 1;
       }
       x1 += 1;
       e += 2 * dely;
+      drawFunc([x1, y1]);
     }
   }
 }

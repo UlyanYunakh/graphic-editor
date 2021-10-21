@@ -4,7 +4,7 @@ import { BresenhamAlgorithm } from '../models/bresenham-algorithm';
 import { CDAAlgorithm } from '../models/cda-algorithm';
 import { SegmentTool } from '../models/segment-tool';
 import { CanvasService } from '../services/canvas.service';
-import { CurrentToolService } from '../services/current-tool.service';
+import { ToolService } from '../services/tool.service';
 
 @Component({
   selector: 'app-tool-bar',
@@ -15,7 +15,7 @@ export class ToolBarComponent implements OnInit {
   selectedTool: ITool | undefined;
 
   constructor(
-    private _toolService: CurrentToolService,
+    private _toolService: ToolService,
     private _canvasService: CanvasService
   ) { }
 
@@ -43,7 +43,7 @@ export class ToolBarComponent implements OnInit {
   }
 
   private setTool(tool: ITool): void {
-    this._toolService.setCurrTool = tool;
+    this._toolService.setTool = tool;
   }
 
 }
