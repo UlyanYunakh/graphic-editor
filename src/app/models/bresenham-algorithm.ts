@@ -37,18 +37,18 @@ export class BresenhamAlgorithm implements IAlgorithm {
       iterNumber = pixelsNumber;
     }
 
-    for (var i = 0; i < iterNumber; i++) {
+    for (var i = 0; i <= iterNumber; i++) {
+      if (reverse) {
+        drawFunc([depValue, iterValue]);
+      } else {
+        drawFunc([iterValue, depValue]);
+      }
       if (e >= 0) {
         e -= one;
         depValue += 1*depSign;
       }
       iterValue += 1*iterSign;
       e += step;
-      if (reverse) {
-        drawFunc([depValue, iterValue]);
-      } else {
-        drawFunc([iterValue, depValue]);
-      }
 
     }
   }
