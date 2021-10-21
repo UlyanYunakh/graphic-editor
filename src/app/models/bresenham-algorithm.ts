@@ -11,24 +11,44 @@ export class BresenhamAlgorithm implements IAlgorithm {
       x2 = args[2],
       y2 = args[3];
 
-    let len = Math.max(Math.abs(x2 - x1), Math.abs(y2 - y1));
     let delx = x2 - x1;
     let dely = y2 - y1;
-    let e = 2 * dely - delx;
+    let len, iterValue, depValue, one, step, iterSign, depSign;
 
+    var reverse = Math.abs(delx)<Math.abs(dely);
+    if(reverse){
+      [delx,dely] = [dely, delx];
+      iterValue = y1;
+      depValue = x1;
+    }else{
+      iterValue = x1;
+      depValue = y1;
+    }
+    len = Math.abs(delx);
+    one = 2 * Math.abs(delx);
+    step = 2 * Math.abs(dely);
+    iterSign = Math.sign(delx);
+    depSign = Math.sign(dely);
     let iterNumber = len;
+
+    let e = 2 * depValue - iterValue;
+    
     if (pixelsNumber && pixelsNumber <= len && pixelsNumber >= 0) {
       iterNumber = pixelsNumber;
     }
 
     for (var i = 0; i < iterNumber; i++) {
-      drawFunc([x1, y1]);
       if (e >= 0) {
-        e -= 2 * delx;
-        y1 += 1;
+        e -= one;
+        depValue += 1*depSign;
       }
-      x1 += 1;
-      e += 2 * dely;
+      iterValue += 1*iterSign;
+      e += step;
+      if (reverse) {
+        drawFunc([depValue, iterValue]);
+      } else {
+        drawFunc([iterValue, depValue]);
+      }
     }
   }
 }
