@@ -33,9 +33,10 @@ export class CanvasComponent implements AfterViewInit {
   }
 
   private getCanvasPoint(mouseEvent: MouseEvent): { x: number, y: number } {
+    var k = 5;
     return {
-      x: Math.floor((mouseEvent.clientX - this.canvasLeft) / 5),
-      y: Math.floor((mouseEvent.clientY - this.canvasTop) / 5)
+      x: Math.floor((mouseEvent.clientX - this.canvasLeft) / k),
+      y: Math.floor((mouseEvent.clientY - this.canvasTop) / k)
     }
   }
 }
