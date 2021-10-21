@@ -6,20 +6,10 @@ export class CDAAlgorithm implements IAlgorithm {
   constructor() { }
 
   compute(args: any[], drawFunc: Function, pixelsNumber?: number): void {
-    let x1, y1, x2, y2, currPixelNumber = 1;
-
-    if (args[0] < args[2]) {
-      x1 = args[0];
-      y1 = args[1];
-      x2 = args[2];
+    let x1 = args[0],
+      y1 = args[1],
+      x2 = args[2],
       y2 = args[3];
-    }
-    else {
-      x1 = args[2];
-      y1 = args[3];
-      x2 = args[0];
-      y2 = args[1];
-    }
 
     let len = Math.max(Math.abs(x2 - x1), Math.abs(y2 - y1));
     let dx = (x2 - x1) / len;
@@ -27,18 +17,16 @@ export class CDAAlgorithm implements IAlgorithm {
 
     x1 += 0.5 * Math.sign(dx);
     y1 += 0.5 * Math.sign(dy);
-    drawFunc([x1, y1]);
 
-    if (pixelsNumber && currPixelNumber == pixelsNumber) return;
-    else currPixelNumber++;
+    let iterNumber = len;
+    if (pixelsNumber && pixelsNumber <= len && pixelsNumber >= 0) {
+      iterNumber = pixelsNumber;
+    }
 
-    while (x1 < x2) {
+    for (var i = 0; i < iterNumber; i++) {
+      drawFunc([x1, y1]);
       x1 = x1 + dx;
       y1 = y1 + dy;
-      drawFunc([x1, y1]);
-
-      if (pixelsNumber && currPixelNumber == pixelsNumber) return;
-      else currPixelNumber++;
     }
   }
 }

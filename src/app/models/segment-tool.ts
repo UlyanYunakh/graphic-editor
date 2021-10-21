@@ -12,11 +12,12 @@ export class SegmentTool implements ITool {
   ) {
     // for example purpose only
 
-    this.draw([1, 4, 4, 1]);
-    this.draw([7, 1, 18, 3]);
+    this.draw([4, 1, 1, 4]);
+    // this.draw([1, 4, 4, 1]);
+    // this.draw([7, 1, 18, 3]);
 
     // this.draw([10, 10, 20, 20]);
-    this.draw([10, 10, 40, 40], 5);
+    // this.draw([10, 10, 40, 40], 5);
   }
 
   draw(args: any[], pixelsNumber?: number): void {
