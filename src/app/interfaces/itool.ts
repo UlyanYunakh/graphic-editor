@@ -4,6 +4,7 @@ export interface ITool {
   id: number;
   name: string;
   algorithm: IAlgorithm;
+  argsCount: number;
   
-  draw(args: []): void;
+  draw(args: any[]): void;
 }

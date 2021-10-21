@@ -15,15 +15,12 @@ export class CDAAlgorithm implements IAlgorithm {
     let dx = (x2 - x1) / len;
     let dy = (y2 - y1) / len;
 
-    x1 += 0.5 * Math.sign(dx);
-    y1 += 0.5 * Math.sign(dy);
-
     let iterNumber = len;
     if (pixelsNumber && pixelsNumber <= len && pixelsNumber >= 0) {
       iterNumber = pixelsNumber;
     }
 
-    for (var i = 0; i < iterNumber; i++) {
+    for (var i = 0; i <= iterNumber; i++) {
       drawFunc([x1, y1]);
       x1 = x1 + dx;
       y1 = y1 + dy;

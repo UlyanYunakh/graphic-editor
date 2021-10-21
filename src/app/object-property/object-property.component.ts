@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { CurrentToolService } from '../services/current-tool.service';
+import { ToolService } from '../services/tool.service';
 
 @Component({
   selector: 'app-object-property',
@@ -9,11 +9,11 @@ import { CurrentToolService } from '../services/current-tool.service';
 export class ObjectPropertyComponent implements OnInit {
   number = 0;
   constructor(
-    private _currToolService: CurrentToolService
+    private _currToolService: ToolService
   ) { }
 
   ngOnInit(): void {
-    this._currToolService.getCurrToolSubject.subscribe(
+    this._currToolService.getToolSubject.subscribe(
       () => {
         console.log(`new value ${this.number++}`);
       }

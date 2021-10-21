@@ -1,9 +1,9 @@
 <div class="tool-bar d-flex flex-column align-items-center">
   <ng-container id="segmentToolButton">
-    <button *ngIf="compareWithCurrToolName(0)" [matMenuTriggerFor]="segmentMenu" mat-mini-fab color="accent">
+    <button *ngIf="compareWithCurrToolId(0)" [matMenuTriggerFor]="segmentMenu" mat-mini-fab color="accent">
       <mat-icon>edit</mat-icon>
     </button>
-    <button *ngIf="!compareWithCurrToolName(0)" [matMenuTriggerFor]="segmentMenu" mat-icon-button color="accent">
+    <button *ngIf="!compareWithCurrToolId(0)" [matMenuTriggerFor]="segmentMenu" mat-icon-button color="accent">
       <mat-icon>edit</mat-icon>
     </button>
   </ng-container>

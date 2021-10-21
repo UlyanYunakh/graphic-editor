@@ -3,15 +3,16 @@ import { ITool } from "../interfaces/itool";
 import { CanvasService } from "../services/canvas.service";
 
 export class SegmentTool implements ITool {
-  id = 0;
-  name = 'Segment';
+  readonly id = 0;
+  readonly name = 'Segment';
+  readonly argsCount = 4;
 
   constructor(
     public algorithm: IAlgorithm,
     private canvasService: CanvasService
   ) {
-    // for example purpose only
     this.canvasService.clearCanvas();
+
     this.draw([4, 1, 4, 8]);
     this.draw([10, 4, 14, 1]);
     this.draw([17, 1, 28, 3]);
@@ -20,6 +21,7 @@ export class SegmentTool implements ITool {
 
     // this.draw([10, 10, 20, 20]);
     // this.draw([10, 10, 40, 40], 5);
+
   }
 
   draw(args: any[], pixelsNumber?: number): void {
@@ -29,7 +31,6 @@ export class SegmentTool implements ITool {
   }
 
   private drawOnCanvas = (args: any[]): void => {
-    // will be replace by some kind of debug service
     console.log(`x: ${Math.round(args[0])}, y; ${Math.round(args[1])}`);
 
     this.canvasService.fillPixel(

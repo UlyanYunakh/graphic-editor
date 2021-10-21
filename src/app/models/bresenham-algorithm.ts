@@ -49,6 +49,7 @@ export class BresenhamAlgorithm implements IAlgorithm {
       } else {
         drawFunc([iterValue, depValue]);
       }
+
     }
   }
 }

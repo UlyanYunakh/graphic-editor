@@ -4,46 +4,43 @@ import { BresenhamAlgorithm } from '../models/bresenham-algorithm';
 import { CDAAlgorithm } from '../models/cda-algorithm';
 import { SegmentTool } from '../models/segment-tool';
 import { CanvasService } from '../services/canvas.service';
-import { CurrentToolService } from '../services/current-tool.service';
+import { ToolService } from '../services/tool.service';
 
 @Component({
   selector: 'app-tool-bar',
   templateUrl: './tool-bar.component.html',
   styleUrls: ['./tool-bar.component.css']
 })
-export class ToolBarComponent implements OnInit {
-  selectedTool: ITool | undefined;
+export class ToolBarComponent {
+  tool: ITool | undefined;
 
   constructor(
-    private _toolService: CurrentToolService,
+    private _toolService: ToolService,
     private _canvasService: CanvasService
   ) { }
 
-  ngOnInit(): void {
-  }
-
-  compareWithCurrToolName(id: number): boolean {
-    return this.selectedTool ? this.selectedTool.id == id : false;
+  compareWithCurrToolId(id: number): boolean {
+    return this.tool ? this.tool.id == id : false;
   }
 
   selectSegmentTool(name: string): void {
     switch (name) {
       case 'CDA':
-        this.selectedTool = new SegmentTool(new CDAAlgorithm(), this._canvasService);
-        this.setTool(this.selectedTool);
+        this.tool = new SegmentTool(new CDAAlgorithm(), this._canvasService);
+        this.setTool(this.tool);
         break;
       case 'BRESENHAM':
-        this.selectedTool = new SegmentTool(new BresenhamAlgorithm(), this._canvasService);
-        this.setTool(this.selectedTool);
+        this.tool = new SegmentTool(new BresenhamAlgorithm(), this._canvasService);
+        this.setTool(this.tool);
         break;
       default:
-        this.selectedTool = new SegmentTool(new CDAAlgorithm(), this._canvasService);
-        this.setTool(this.selectedTool);
+        this.tool = new SegmentTool(new CDAAlgorithm(), this._canvasService);
+        this.setTool(this.tool);
     }
   }
 
   private setTool(tool: ITool): void {
-    this._toolService.setCurrTool = tool;
+    this._toolService.setTool = tool;
   }
 
 }
