@@ -11,7 +11,7 @@ export class SegmentTool implements ITool {
     private canvasService: CanvasService
   ) {
     // for example purpose only
-
+    this.canvasService.clearCanvas();
     this.draw([4, 1, 1, 4]);
     // this.draw([1, 4, 4, 1]);
     // this.draw([7, 1, 18, 3]);

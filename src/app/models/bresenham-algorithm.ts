@@ -1,7 +1,7 @@
 import { IAlgorithm } from "../interfaces/ialgorithm";
 
-export class CDAAlgorithm implements IAlgorithm {
-  name = 'CDA algorithm';
+export class BresenhamAlgorithm implements IAlgorithm {
+  name = 'Bresenham algorithm';
 
   constructor() { }
 
@@ -12,11 +12,9 @@ export class CDAAlgorithm implements IAlgorithm {
       y2 = args[3];
 
     let len = Math.max(Math.abs(x2 - x1), Math.abs(y2 - y1));
-    let dx = (x2 - x1) / len;
-    let dy = (y2 - y1) / len;
-
-    x1 += 0.5 * Math.sign(dx);
-    y1 += 0.5 * Math.sign(dy);
+    let delx = x2 - x1;
+    let dely = y2 - y1;
+    let e = 2 * dely - delx;
 
     let iterNumber = len;
     if (pixelsNumber && pixelsNumber <= len && pixelsNumber >= 0) {
@@ -25,8 +23,12 @@ export class CDAAlgorithm implements IAlgorithm {
 
     for (var i = 0; i < iterNumber; i++) {
       drawFunc([x1, y1]);
-      x1 = x1 + dx;
-      y1 = y1 + dy;
+      if (e >= 0) {
+        e -= 2 * delx;
+        y1 += 1;
+      }
+      x1 += 1;
+      e += 2 * dely;
     }
   }
 }
