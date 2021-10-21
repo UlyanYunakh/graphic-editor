@@ -30,3 +30,47 @@ export class CDAAlgorithm implements IAlgorithm {
     }
   }
 }
+
+export class BresenhamAlgorithm implements IAlgorithm {
+  name = 'Bresenham algorithm';
+
+  constructor() { }
+
+  compute(args: any[], drawFunc: Function, pixelsNumber?: number): void {
+    let x1, y1, x2, y2, currPixelNumber = 1;
+
+    if (args[0] < args[2]) {
+      x1 = args[0];
+      y1 = args[1];
+      x2 = args[2];
+      y2 = args[3];
+    }
+    else {
+      x1 = args[2];
+      y1 = args[3];
+      x2 = args[0];
+      y2 = args[1];
+    }
+
+    let delx = x2 - x1;
+    let dely = y2 - y1;
+    let e = 2 * dely - delx;
+
+    drawFunc([x1, y1]);
+
+    if (pixelsNumber && currPixelNumber == pixelsNumber) return;
+    else currPixelNumber++;
+
+    while (x1 < x2) {
+      if (e >= 0) {
+        e -= 2*delx;
+        y1 += 1;
+      }
+      x1 += 1;
+      e += 2 * dely;
+      drawFunc([x1, y1]);
+      if (pixelsNumber && currPixelNumber == pixelsNumber) return;
+      else currPixelNumber++;
+    }
+  }
+}
