@@ -1,5 +1,4 @@
-import { AfterViewInit, Component, ElementRef, OnInit, ViewChild } from '@angular/core';
-import { ITool } from '../interfaces/itool';
+import { AfterViewInit, Component } from '@angular/core';
 import { CanvasService } from '../services/canvas.service';
 import { ToolService } from '../services/tool.service';
 
@@ -9,8 +8,6 @@ import { ToolService } from '../services/tool.service';
   styleUrls: ['./canvas.component.css']
 })
 export class CanvasComponent implements AfterViewInit {
-  private canvasLeft = 0;
-  private canvasTop = 0;
 
   constructor(
     private _canvasService: CanvasService,
@@ -19,24 +16,19 @@ export class CanvasComponent implements AfterViewInit {
 
   ngAfterViewInit(): void {
     var canvas = document.querySelector('.canvas');
-    if (canvas) {
-      this._canvasService.setCanvasContext(canvas as HTMLCanvasElement);
-      this.canvasLeft = canvas.getBoundingClientRect().left;
-      this.canvasTop = canvas.getBoundingClientRect().top;
+    var container = document.querySelector('.canvas-container');
+
+    if (canvas && container) {
+      this._canvasService.initCanvas(
+        canvas as HTMLCanvasElement,
+        container as HTMLDivElement
+      );
     }
   }
 
   canvasClick(mouseEvent: MouseEvent): void {
-    var point = this.getCanvasPoint(mouseEvent);
+    var point = this._canvasService.getCursorPositionOnCanvas(mouseEvent);
     this._toolService.addArg(point.x);
     this._toolService.addArg(point.y);
-  }
-
-  private getCanvasPoint(mouseEvent: MouseEvent): { x: number, y: number } {
-    var k = 5;
-    return {
-      x: Math.floor((mouseEvent.clientX - this.canvasLeft) / k),
-      y: Math.floor((mouseEvent.clientY - this.canvasTop) / k)
-    }
   }
 }
