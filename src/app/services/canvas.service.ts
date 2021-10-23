@@ -1,5 +1,4 @@
-import { ElementRef, Injectable, OnInit, ViewChild } from '@angular/core';
-import { Subject } from 'rxjs';
+import { Injectable } from '@angular/core';
 
 @Injectable({
   providedIn: 'root'
@@ -45,7 +44,7 @@ export class CanvasService {
     this.markOutCanvas();
   }
 
-  getCursorPositionOnCanvas(mouseEvent: MouseEvent): {x: number, y: number} {
+  getCursorPositionOnCanvas(mouseEvent: MouseEvent): { x: number, y: number } {
     return {
       x: this.floorNumber(mouseEvent.clientX - this._canvasStart.x),
       y: this.floorNumber(mouseEvent.clientY - this._canvasStart.y)
@@ -75,16 +74,16 @@ export class CanvasService {
     if (this._context) {
       this._context.beginPath();
 
-      Array.from({length: this._canvasEnd.x}, (_, index) => index * this._pixelSize).forEach((item: number) => {
-        this._context!.moveTo(item, 0); 
+      Array.from({ length: this._canvasEnd.x }, (_, index) => index * this._pixelSize).forEach((item: number) => {
+        this._context!.moveTo(item, 0);
         this._context!.lineTo(item, this._canvasEnd.y);
-      }); 
+      });
 
-      Array.from({length: this._canvasEnd.y}, (_, index) => index * this._pixelSize).forEach((item: number) => {
-        this._context!.moveTo(0, item); 
+      Array.from({ length: this._canvasEnd.y }, (_, index) => index * this._pixelSize).forEach((item: number) => {
+        this._context!.moveTo(0, item);
         this._context!.lineTo(this._canvasEnd.x, item);
-      });   
-      
+      });
+
       this._context.stroke();
     }
   }
