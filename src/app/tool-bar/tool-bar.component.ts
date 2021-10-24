@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { ITool } from '../interfaces/itool';
 import { BresenhamAlgorithm } from '../models/bresenham-algorithm';
 import { CDAAlgorithm } from '../models/cda-algorithm';

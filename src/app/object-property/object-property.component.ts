@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { IObject } from '../interfaces/iobject';
+import { CanvasService } from '../services/canvas.service';
 import { ToolService } from '../services/tool.service';
 
 @Component({
@@ -7,17 +9,16 @@ import { ToolService } from '../services/tool.service';
   styleUrls: ['./object-property.component.css']
 })
 export class ObjectPropertyComponent implements OnInit {
-  number = 0;
+  currObject: IObject | undefined;
+
   constructor(
-    private _currToolService: ToolService
+    private _toolService: ToolService,
+    private _canvasService: CanvasService
   ) { }
 
   ngOnInit(): void {
-    this._currToolService.toolSubject.subscribe(
-      () => {
-        // console.log(`new value ${this.number++}`);
-      }
-    );
+    this._toolService.newObjectSbj.subscribe(newObject => {
+      this.currObject = newObject;
+    });
   }
-
 }
