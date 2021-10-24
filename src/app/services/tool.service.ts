@@ -1,35 +1,79 @@
 import { Injectable } from '@angular/core';
 import { Subject } from 'rxjs';
+import { IObject } from '../interfaces/iobject';
 import { ITool } from '../interfaces/itool';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ToolService {
+  newObjectSbj: Subject<IObject> = new Subject();
+
+  private _currArgs: any[] = [];
+  private _currStep: number = 0;
+  private _currArgType: number = -1;
+  
   private _tool: ITool | undefined;
-  private _toolSubject = new Subject<ITool>();
-  private _toolArgs: any[] = []
+  private _toolSbj = new Subject<ITool>();
+  private _argSbj: Subject<any> = new Subject();
 
   constructor() { }
 
-  get getToolSubject(): Subject<ITool> {
-    return this._toolSubject;
+  get toolSubject(): Subject<ITool> {
+    return this._toolSbj;
+  }
+
+  get argSubject(): Subject<any> {
+    return this._argSbj;
   }
 
   set setTool(tool: ITool) {
+    this._argSbj = new Subject();
+
     this._tool = tool;
-    this._toolArgs = [];
-    this._toolSubject.next(this._tool);
+    this._toolSbj.next(this._tool);
+
+    this._currArgs = [];
+    this._currStep = 0;
+    this._currArgType = -1
+
+    this.startShowingSteps();
   };
 
-  addArg(arg: any): void {
-    if (this._tool) {
-      this._toolArgs.push(arg);
-      if(this._toolArgs.length == this._tool.argsCount)
-      {
-        this._tool.draw(this._toolArgs);
-        this._toolArgs = [];
+  set arg(newPoint: { value: { x: number, y: number }, type: number }) {
+    this.argSubject.next(newPoint);
+  }
+
+  private startShowingSteps(): void {
+    this._argSbj.subscribe(arg => {
+      if (this._tool) {
+        if (arg.type == this._currArgType) {
+          this._currArgs.push(arg.value);
+          this._currStep++;
+        }
+
+        // if curr arg type not point then init some kind of dialog with input (lab 2 and so on)
+
+        if (this._currArgs.length == this._tool.argsCount) {
+          this.newObjectSbj.next({
+              name: `${this._tool.name} ${this._tool.algorithm.name}`,
+              args: this._currArgs
+            }
+          );
+
+          this._tool.draw(this._currArgs);
+
+          this._currArgs = [];
+          this._currStep = 0;
+          this._currArgType = -1
+        }
+
+        console.log(this._tool.steps[this._currStep].info);
+
+        this._currArgType = this._tool.steps[this._currStep].type;
       }
-    }
+    });
+
+    this._argSbj.next({ type: undefined });
   }
 }

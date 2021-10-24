@@ -1,15 +1,13 @@
 import { IAlgorithm } from "../interfaces/ialgorithm";
 
 export class CDAAlgorithm implements IAlgorithm {
-  name = 'CDA algorithm';
-
-  constructor() { }
+  readonly name = 'ЦДА';
 
   compute(args: any[], drawFunc: Function, pixelsNumber?: number): void {
-    let x1 = args[0],
-      y1 = args[1],
-      x2 = args[2],
-      y2 = args[3];
+    let x1 = args[0].x,
+      y1 = args[0].y,
+      x2 = args[1].x,
+      y2 = args[1].y;
 
     let len = Math.max(Math.abs(x2 - x1), Math.abs(y2 - y1));
     let dx = (x2 - x1) / len;
@@ -21,7 +19,7 @@ export class CDAAlgorithm implements IAlgorithm {
     }
 
     for (var i = 0; i <= iterNumber; i++) {
-      drawFunc([x1, y1]);
+      drawFunc({ x: x1, y: y1 });
       x1 = x1 + dx;
       y1 = y1 + dy;
     }

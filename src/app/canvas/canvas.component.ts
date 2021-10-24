@@ -28,7 +28,6 @@ export class CanvasComponent implements AfterViewInit {
 
   canvasClick(mouseEvent: MouseEvent): void {
     var point = this._canvasService.getCursorPositionOnCanvas(mouseEvent);
-    this._toolService.addArg(point.x);
-    this._toolService.addArg(point.y);
+    this._toolService.arg = { value: point, type: 0 };
   }
 }

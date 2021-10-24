@@ -15,7 +15,7 @@ export class HeaderComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this._currTool.getToolSubject.subscribe(
+    this._currTool.toolSubject.subscribe(
       newTool => {
         this.tool = newTool;
       }

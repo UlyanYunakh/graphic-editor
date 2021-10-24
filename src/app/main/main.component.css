@@ -1,4 +1,4 @@
-.example-container {
+.left-side-menu {
   position: absolute;
   top: 60px;
   bottom: 60px;
@@ -6,9 +6,9 @@
   right: 0;
 }
 
-.example-sidenav2 {
+.right-side-menu {
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 200px;
+  width: 400px;
 }
