@@ -47,8 +47,8 @@ export class CanvasService {
 
   getCursorPositionOnCanvas(mouseEvent: MouseEvent): {x: number, y: number} {
     return {
-      x: this.floorNumber(mouseEvent.clientX - this._canvasStart.x),
-      y: this.floorNumber(mouseEvent.clientY - this._canvasStart.y)
+      x: this.pixelise(mouseEvent.clientX - this._canvasStart.x),
+      y: this.pixelise(mouseEvent.clientY - this._canvasStart.y)
     }
   }
 
@@ -75,12 +75,12 @@ export class CanvasService {
     if (this._context) {
       this._context.beginPath();
 
-      Array.from({length: this._canvasEnd.x}, (_, index) => index * this._pixelSize).forEach((item: number) => {
+      Array.from({length: this.pixelise(this._canvasEnd.x)}, (_, index) => index * this._pixelSize).forEach((item: number) => {
         this._context!.moveTo(item, 0); 
         this._context!.lineTo(item, this._canvasEnd.y);
       }); 
 
-      Array.from({length: this._canvasEnd.y}, (_, index) => index * this._pixelSize).forEach((item: number) => {
+      Array.from({length: this.pixelise(this._canvasEnd.y)}, (_, index) => index * this._pixelSize).forEach((item: number) => {
         this._context!.moveTo(0, item); 
         this._context!.lineTo(this._canvasEnd.x, item);
       });   
@@ -89,5 +89,5 @@ export class CanvasService {
     }
   }
 
-  private floorNumber = (number: number): number => Math.floor(number / this._pixelSize);
+  private pixelise = (number: number): number => Math.floor(number / this._pixelSize);
 }
