@@ -13,9 +13,9 @@ export class ObjectPropertyComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this._currToolService.getToolSubject.subscribe(
+    this._currToolService.toolSubject.subscribe(
       () => {
-        console.log(`new value ${this.number++}`);
+        // console.log(`new value ${this.number++}`);
       }
     );
   }

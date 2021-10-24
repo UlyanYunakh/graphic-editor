@@ -1,26 +1,24 @@
 import { IAlgorithm } from "../interfaces/ialgorithm";
 
 export class BresenhamAlgorithm implements IAlgorithm {
-  name = 'Bresenham algorithm';
-
-  constructor() { }
+  readonly name = 'Bresenham algorithm';
 
   compute(args: any[], drawFunc: Function, pixelsNumber?: number): void {
-    let x1 = args[0],
-      y1 = args[1],
-      x2 = args[2],
-      y2 = args[3];
+    let x1 = args[0].x,
+      y1 = args[0].y,
+      x2 = args[1].x,
+      y2 = args[1].y;
 
     let delx = x2 - x1;
     let dely = y2 - y1;
     let len, iterValue, depValue, one, step, iterSign, depSign;
 
-    var reverse = Math.abs(delx)<Math.abs(dely);
-    if(reverse){
-      [delx,dely] = [dely, delx];
+    var reverse = Math.abs(delx) < Math.abs(dely);
+    if (reverse) {
+      [delx, dely] = [dely, delx];
       iterValue = y1;
       depValue = x1;
-    }else{
+    } else {
       iterValue = x1;
       depValue = y1;
     }
@@ -32,22 +30,22 @@ export class BresenhamAlgorithm implements IAlgorithm {
     let iterNumber = len;
 
     let e = 2 * dely - delx;
-    
+
     if (pixelsNumber && pixelsNumber <= len && pixelsNumber >= 0) {
       iterNumber = pixelsNumber;
     }
 
     for (var i = 0; i <= iterNumber; i++) {
       if (reverse) {
-        drawFunc([depValue, iterValue]);
+        drawFunc({ x: depValue, y: iterValue });
       } else {
-        drawFunc([iterValue, depValue]);
+        drawFunc({ x: iterValue, y: depValue });
       }
       if (e >= 0) {
         e -= one;
-        depValue += 1*depSign;
+        depValue += 1 * depSign;
       }
-      iterValue += 1*iterSign;
+      iterValue += 1 * iterSign;
       e += step;
 
     }
