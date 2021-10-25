@@ -3,7 +3,9 @@ import { IAlgorithm } from "../interfaces/ialgorithm";
 export class BresenhamAlgorithm implements IAlgorithm {
   readonly name = 'Bresenham algorithm';
 
-  compute(args: any[], drawFunc: Function, pixelsNumber?: number): void {
+  compute(args: any[], drawFunc: Function, pixelsNumber?: number): any[] {
+    let table: any[] = [];
+
     let x1 = args[0].x,
       y1 = args[0].y,
       x2 = args[1].x,
@@ -38,8 +40,22 @@ export class BresenhamAlgorithm implements IAlgorithm {
     for (var i = 0; i <= iterNumber; i++) {
       if (reverse) {
         drawFunc({ x: depValue, y: iterValue });
+        table.push({
+          X: depValue,
+          Y: iterValue,
+          depValue: depValue,
+          iterValue: iterValue,
+          error: e
+        });
       } else {
         drawFunc({ x: iterValue, y: depValue });
+        table.push({
+          X: iterValue,
+          Y: depValue,
+          depValue: depValue,
+          iterValue: iterValue,
+          error: e
+        });
       }
       if (e >= 0) {
         e -= one;
@@ -49,5 +65,17 @@ export class BresenhamAlgorithm implements IAlgorithm {
       e += step;
 
     }
+
+    return table;
+  }
+
+  getTableColumns(): string[] {
+    return [
+      'X',
+      'Y',
+      'depValue',
+      'iterValue',
+      'error'
+    ];
   }
 }
