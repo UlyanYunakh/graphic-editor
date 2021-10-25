@@ -1,5 +1,6 @@
 export interface IAlgorithm {
   name: string;
   
-  compute(agrs: any[], drawFunc: Function, pixelsNumber?: number): void;
+  compute(agrs: any[], drawFunc: Function, pixelsNumber?: number): any[];
+  getTableColumns(): string[];
 }

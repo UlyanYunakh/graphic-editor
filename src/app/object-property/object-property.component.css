@@ -1,0 +1,19 @@
+.obj-table {
+  width: 100%;
+  overflow: scroll;
+}
+
+.mat-header-cell {
+  min-width: 100px;
+}
+
+.mat-cell {
+  max-width: 60px;
+  padding-right: 10px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+table {
+  width: 100%;
+}

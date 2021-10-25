@@ -55,13 +55,28 @@ export class ToolService {
         // if curr arg type not point then init some kind of dialog with input (lab 2 and so on)
 
         if (this._currArgs.length == this._tool.argsCount) {
-          this.newObjectSbj.next({
-              name: `${this._tool.name} ${this._tool.algorithm.name}`,
-              args: this._currArgs
-            }
-          );
+          var table = this._tool.draw(this._currArgs);
 
-          this._tool.draw(this._currArgs);
+          this.newObjectSbj.next({
+            name: `${this._tool.name} ${this._tool.algorithm.name}`,
+            args: [
+              {
+                x: this._currArgs[0].x,
+                y: this._currArgs[0].y,
+                type: 0,
+                name: 'Начальная точка'
+              },
+              {
+                x: this._currArgs[1].x,
+                y: this._currArgs[1].y,
+                type: 0,
+                name: 'Конечная точка'
+              },
+            ],
+            tableColumns: this._tool.algorithm.getTableColumns(),
+            table: table
+          }
+        );
 
           this._currArgs = [];
           this._currStep = 0;
