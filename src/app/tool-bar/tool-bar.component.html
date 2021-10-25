@@ -1,4 +1,4 @@
-<div class="tool-bar d-flex flex-column align-items-center">
+<div class="tool-bar d-flex flex-column align-items-center" style="height: 100%;">
   <ng-container id="segmentToolButton">
     <button *ngIf="compareWithCurrToolId(0)" [matMenuTriggerFor]="segmentMenu" mat-mini-fab color="accent">
       <mat-icon>edit</mat-icon>
@@ -18,6 +18,19 @@
       <button mat-menu-item (click)="selectSegmentTool('DummyAlgorithm3')">
         <span>Algorithm 3</span>
       </button>
+    </mat-menu>
+  </ng-container>
+  
+  <ng-container >
+    <button class="pixel-setting" mat-button [matMenuTriggerFor]="pixelSize" mat-icon-button color="accent" title="Pixel size">
+      <mat-icon>view_array</mat-icon>
+    </button>
+    <mat-menu #pixelSize="matMenu">
+      <button mat-menu-item (click)="selectPixelSize('Smaller')">Smaller</button>
+      <button mat-menu-item (click)="selectPixelSize('Small')">Small</button>
+      <button mat-menu-item (click)="selectPixelSize('Medium')">Medium</button>
+      <button mat-menu-item (click)="selectPixelSize('Large')">Large</button>
+      <button mat-menu-item (click)="selectPixelSize('Larger')">Larger</button>
     </mat-menu>
   </ng-container>
 </div>

@@ -39,8 +39,28 @@ export class ToolBarComponent {
     }
   }
 
+  selectPixelSize(size: string): void {
+    switch (size) {
+      case 'Smaller':
+        this._canvasService.pixelSize = 6;
+        break;
+      case 'Small':
+        this._canvasService.pixelSize = 8;
+        break;
+      default:
+      case 'Medium':
+        this._canvasService.pixelSize = 10;
+        break;
+      case 'Large':
+        this._canvasService.pixelSize = 12;
+        break;
+      case 'Larger':
+        this._canvasService.pixelSize = 15;
+        break;
+    }
+  }
+
   private setTool(tool: ITool): void {
     this._toolService.setTool = tool;
   }
-
 }
