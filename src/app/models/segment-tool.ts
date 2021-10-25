@@ -31,8 +31,6 @@ export class SegmentTool implements ITool {
   }
 
   private drawOnCanvas = (point: IPoint): void => {
-    console.log(`x: ${Math.round(point.x)}, y; ${Math.round(point.y)}`);
-
     this.canvasService.fillPixel(
       Math.round(point.x),
       Math.round(point.y)
