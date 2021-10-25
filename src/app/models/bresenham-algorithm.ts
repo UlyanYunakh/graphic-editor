@@ -1,7 +1,7 @@
 import { IAlgorithm } from "../interfaces/ialgorithm";
 
 export class BresenhamAlgorithm implements IAlgorithm {
-  readonly name = 'Bresenham algorithm';
+  readonly name = 'Алгоритм Брезенхама';
 
   compute(args: any[], drawFunc: Function, pixelsNumber?: number): any[] {
     let table: any[] = [];

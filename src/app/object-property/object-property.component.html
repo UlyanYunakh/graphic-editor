@@ -1,11 +1,26 @@
 <div *ngIf="currObject">
   <div class="obj-info">
-    <p>{{currObject.name}}</p>
+    <h3>{{currObject.name}}</h3>
     <div *ngFor="let arg of currObject.args" [ngSwitch]="arg.type">
+
       <div *ngSwitchCase="0"> <!-- type: point -->
-        {{arg.name}}:<br>
-        X: {{arg.x}}; Y: {{arg.y}};
+        <div class="point-name">{{arg.name}}:</div>
+        <div class="point-axes">
+          <div class="point-axes_item">
+            <mat-form-field color="accent">
+              <span matPrefix>X:</span>
+              <input matInput disabled type="number" value="{{arg.x}}">
+            </mat-form-field>
+          </div>
+          <div class="point-axes_item">
+            <mat-form-field color="accent">
+              <span matPrefix>Y:</span>
+              <input matInput disabled type="number"  value="{{arg.y}}">
+            </mat-form-field>
+          </div>
+        </div>
       </div>
+
     </div>
   </div>
   <div class="obj-table">
