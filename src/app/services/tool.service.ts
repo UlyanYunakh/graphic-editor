@@ -1,5 +1,7 @@
 import { Injectable } from '@angular/core';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { Subject } from 'rxjs';
+import { CanvasComponent } from '../canvas/canvas.component';
 import { IObject } from '../interfaces/iobject';
 import { ITool } from '../interfaces/itool';
 
@@ -12,10 +14,12 @@ export class ToolService {
   private _currArgs: any[] = [];
   private _currStep: number = 0;
   private _currArgType: number = -1;
-  
+
   private _tool: ITool | undefined;
   private _toolSbj = new Subject<ITool>();
   private _argSbj: Subject<any> = new Subject();
+
+  private _snackBar: MatSnackBar | undefined;
 
   constructor() { }
 
@@ -42,6 +46,10 @@ export class ToolService {
 
   set arg(newPoint: { value: { x: number, y: number }, type: number }) {
     this.argSubject.next(newPoint);
+  }
+
+  set snackBar(snackBar: MatSnackBar) {
+    this._snackBar = snackBar;
   }
 
   private startShowingSteps(): void {
@@ -75,15 +83,20 @@ export class ToolService {
             ],
             tableColumns: this._tool.algorithm.getTableColumns(),
             table: table
-          }
-        );
+          });
 
           this._currArgs = [];
           this._currStep = 0;
           this._currArgType = -1
         }
 
-        console.log(this._tool.steps[this._currStep].info);
+        if (this._snackBar) {
+          this._snackBar.open(this._tool.steps[this._currStep].info, '', {
+            horizontalPosition: 'center',
+            verticalPosition: 'top',
+            duration: 1500,
+          });
+        }
 
         this._currArgType = this._tool.steps[this._currStep].type;
       }
