@@ -1,0 +1,37 @@
+.obj-info {
+  margin: 10px;
+}
+
+/* arg type: point */
+.point-axes {
+  display: flex;
+}
+
+.point-axes_item {
+  margin-left: 5px;
+}
+
+.point-axes_item span {
+  margin-right: 10px;
+}
+
+.point-axes_item mat-form-field {
+  width: 100px;
+}
+
+/* table */
+.obj-table {
+  width: 100%;
+  overflow: scroll;
+}
+
+.mat-header-cell {
+  min-width: 100px;
+}
+
+.mat-cell {
+  max-width: 60px;
+  padding-right: 10px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}

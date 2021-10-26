@@ -1,5 +1,7 @@
 import { Injectable } from '@angular/core';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { Subject } from 'rxjs';
+import { CanvasComponent } from '../canvas/canvas.component';
 import { IObject } from '../interfaces/iobject';
 import { ITool } from '../interfaces/itool';
 
@@ -12,10 +14,12 @@ export class ToolService {
   private _currArgs: any[] = [];
   private _currStep: number = 0;
   private _currArgType: number = -1;
-  
+
   private _tool: ITool | undefined;
   private _toolSbj = new Subject<ITool>();
   private _argSbj: Subject<any> = new Subject();
+
+  private _snackBar: MatSnackBar | undefined;
 
   constructor() { }
 
@@ -44,6 +48,10 @@ export class ToolService {
     this.argSubject.next(newPoint);
   }
 
+  set snackBar(snackBar: MatSnackBar) {
+    this._snackBar = snackBar;
+  }
+
   private startShowingSteps(): void {
     this._argSbj.subscribe(arg => {
       if (this._tool) {
@@ -55,20 +63,40 @@ export class ToolService {
         // if curr arg type not point then init some kind of dialog with input (lab 2 and so on)
 
         if (this._currArgs.length == this._tool.argsCount) {
-          this.newObjectSbj.next({
-              name: `${this._tool.name} ${this._tool.algorithm.name}`,
-              args: this._currArgs
-            }
-          );
+          var table = this._tool.draw(this._currArgs);
 
-          this._tool.draw(this._currArgs);
+          this.newObjectSbj.next({
+            name: `${this._tool.name} ${this._tool.algorithm.name}`,
+            args: [
+              {
+                x: this._currArgs[0].x,
+                y: this._currArgs[0].y,
+                type: 0,
+                name: 'Начальная точка'
+              },
+              {
+                x: this._currArgs[1].x,
+                y: this._currArgs[1].y,
+                type: 0,
+                name: 'Конечная точка'
+              },
+            ],
+            tableColumns: this._tool.algorithm.getTableColumns(),
+            table: table
+          });
 
           this._currArgs = [];
           this._currStep = 0;
           this._currArgType = -1
         }
 
-        console.log(this._tool.steps[this._currStep].info);
+        if (this._snackBar) {
+          this._snackBar.open(this._tool.steps[this._currStep].info, '', {
+            horizontalPosition: 'center',
+            verticalPosition: 'top',
+            duration: 1500,
+          });
+        }
 
         this._currArgType = this._tool.steps[this._currStep].type;
       }

@@ -17,5 +17,5 @@ export interface ITool {
   argsCount: number;
   steps: IStep[];
   
-  draw(args: any[]): void;
+  draw(args: any[]): any[];
 }

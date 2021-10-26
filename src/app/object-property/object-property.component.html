@@ -1,3 +1,40 @@
-<div *ngIf='currObject'>
-  <p>{{currObject.name}}</p>
+<div *ngIf="currObject">
+  <div class="obj-info">
+    <h3>{{currObject.name}}</h3>
+    <div *ngFor="let arg of currObject.args" [ngSwitch]="arg.type">
+
+      <div *ngSwitchCase="0"> <!-- type: point -->
+        <div class="point-name">{{arg.name}}:</div>
+        <div class="point-axes">
+          <div class="point-axes_item">
+            <mat-form-field color="accent">
+              <span matPrefix>X:</span>
+              <input matInput disabled type="number" value="{{arg.x}}">
+            </mat-form-field>
+          </div>
+          <div class="point-axes_item">
+            <mat-form-field color="accent">
+              <span matPrefix>Y:</span>
+              <input matInput disabled type="number"  value="{{arg.y}}">
+            </mat-form-field>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+  <div class="obj-table">
+    <table mat-table [dataSource]="currObject.table">
+
+      <ng-container *ngFor="let column of currObject.tableColumns">
+        <ng-container matColumnDef="{{column}}">
+          <th mat-header-cell *matHeaderCellDef>{{column}}</th>
+          <td mat-cell *matCellDef="let element">{{element[column]}}</td>
+        </ng-container>
+      </ng-container>
+    
+      <tr mat-header-row *matHeaderRowDef="currObject.tableColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: currObject.tableColumns;"></tr>
+    </table>
+  </div>
 </div>

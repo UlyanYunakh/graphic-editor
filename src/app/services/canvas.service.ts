@@ -13,6 +13,15 @@ export class CanvasService {
   private _canvasStart = { x: 0, y: 0 };
   private _canvasEnd = { x: 0, y: 0 };
 
+  set pixelSize(size: number) {
+    this._pixelSize = size;
+    this.clearCanvas();
+    this.initCanvas(
+      this._canvas!,
+      this._container!
+    );
+  }
+
   initCanvas(
     canvas: HTMLCanvasElement,
     container: HTMLDivElement
@@ -51,14 +60,20 @@ export class CanvasService {
     }
   }
 
-  fillPixel(x: number, y: number): void {
+  fillPixel(x: number, y: number, color?: string): void {
     if (this._context) {
+      if (color) {
+        this._context.fillStyle = color;
+      }
+
       this._context.fillRect(
         x * this._pixelSize,
         y * this._pixelSize,
         this._pixelSize,
         this._pixelSize
       );
+
+      this._context.restore();
     }
   }
 
@@ -70,17 +85,27 @@ export class CanvasService {
     }
   }
 
+  // private setCanvasBounds(): void {
+  //   if (this._canvas && this._container) {
+  //     var containerWidth = this._container.offsetWidth;
+  //     var containerHeight = this._container.offsetHeight;
+
+  //     this._canvas.width = (containerWidth - 21) - (containerWidth - 21) % this._pixelSize; // 21 because some css width property with container 
+  //     this._canvas.height = (containerHeight - 20) - (containerHeight - 20) % this._pixelSize;
+  //   }
+  // }
+
   private markOutCanvas(): void {
     if (this._context) {
       this._context.beginPath();
 
-      Array.from({length: this.pixelise(this._canvasEnd.x)}, (_, index) => index * this._pixelSize).forEach((item: number) => {
-        this._context!.moveTo(item, 0); 
+      Array.from({ length: this.pixelise(this._canvasEnd.x) }, (_, index) => index * this._pixelSize).forEach((item: number) => {
+        this._context!.moveTo(item, 0);
         this._context!.lineTo(item, this._canvasEnd.y);
       });
 
-      Array.from({length: this.pixelise(this._canvasEnd.y)}, (_, index) => index * this._pixelSize).forEach((item: number) => {
-        this._context!.moveTo(0, item); 
+      Array.from({ length: this.pixelise(this._canvasEnd.y) }, (_, index) => index * this._pixelSize).forEach((item: number) => {
+        this._context!.moveTo(0, item);
         this._context!.lineTo(this._canvasEnd.x, item);
       });
 

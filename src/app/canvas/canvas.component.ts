@@ -1,6 +1,7 @@
 import { AfterViewInit, Component } from '@angular/core';
 import { CanvasService } from '../services/canvas.service';
 import { ToolService } from '../services/tool.service';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-canvas',
@@ -11,7 +12,8 @@ export class CanvasComponent implements AfterViewInit {
 
   constructor(
     private _canvasService: CanvasService,
-    private _toolService: ToolService
+    private _toolService: ToolService,
+    private _snackBar: MatSnackBar
   ) { }
 
   ngAfterViewInit(): void {
@@ -23,6 +25,7 @@ export class CanvasComponent implements AfterViewInit {
         canvas as HTMLCanvasElement,
         container as HTMLDivElement
       );
+      this._toolService.snackBar = this._snackBar;
     }
   }
 

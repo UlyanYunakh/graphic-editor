@@ -24,18 +24,17 @@ export class SegmentTool implements ITool {
     this.draw([{ x: 8, y: 20 }, { x: 2, y: 20}]);
   }
 
-  draw(args: any[], pixelsNumber?: number): void {
+  draw(args: any[], pixelsNumber?: number): any[] {
     if (pixelsNumber) this.canvasService.clearCanvas();
 
-    this.algorithm.compute(args, this.drawOnCanvas, pixelsNumber);
+    return this.algorithm.compute(args, this.drawOnCanvas, pixelsNumber);
   }
 
-  private drawOnCanvas = (point: IPoint): void => {
-    console.log(`x: ${Math.round(point.x)}, y; ${Math.round(point.y)}`);
-
+  private drawOnCanvas = (point: IPoint, color?: string): void => {
     this.canvasService.fillPixel(
       Math.round(point.x),
-      Math.round(point.y)
+      Math.round(point.y),
+      color
     );
   }
 }
