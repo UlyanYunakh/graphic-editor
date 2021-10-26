@@ -85,16 +85,6 @@ export class CanvasService {
     }
   }
 
-  // private setCanvasBounds(): void {
-  //   if (this._canvas && this._container) {
-  //     var containerWidth = this._container.offsetWidth;
-  //     var containerHeight = this._container.offsetHeight;
-
-  //     this._canvas.width = (containerWidth - 21) - (containerWidth - 21) % this._pixelSize; // 21 because some css width property with container 
-  //     this._canvas.height = (containerHeight - 20) - (containerHeight - 20) % this._pixelSize;
-  //   }
-  // }
-
   private markOutCanvas(): void {
     if (this._context) {
       this._context.beginPath();
