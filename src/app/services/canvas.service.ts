@@ -60,10 +60,10 @@ export class CanvasService {
     }
   }
 
-  fillPixel(x: number, y: number, color?: string): void {
+  fillPixel(x: number, y: number, alpha?: number): void {
     if (this._context) {
-      if (color) {
-        this._context.fillStyle = color;
+      if (alpha) {
+        this._context.fillStyle = `rgba(0,0,0,${alpha})`;
       }
 
       this._context.fillRect(
