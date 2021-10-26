@@ -1,10 +1,14 @@
 import { IAlgorithm } from "../interfaces/ialgorithm";
 import { BresenhamAlgorithm } from "./bresenham-algorithm";
+import { CDAAlgorithm } from "./cda-algorithm";
 
 export class VuAlgorithm implements IAlgorithm {
+
     readonly name = 'Vu algorithm';
 
-    compute(args: any[], drawFunc: Function, pixelsNumber?: number): void {
+    compute(args: any[], drawFunc: Function, pixelsNumber?: number): any[] {
+        let table: any[] = [];
+
         let x1 = args[0].x,
             y1 = args[0].y,
             x2 = args[1].x,
@@ -14,10 +18,10 @@ export class VuAlgorithm implements IAlgorithm {
         let dely = y2 - y1;
 
         if (Math.abs(delx) == Math.abs(dely) || (delx == 0 || dely == 0)) {
-            let bres = new BresenhamAlgorithm;
-            bres.compute(args, drawFunc, pixelsNumber);
+            let cda = new CDAAlgorithm();
+            table = cda.compute(args, drawFunc, pixelsNumber);
         } else {
-            let len, iterValue, depValue, one, step, iterSign, depSign;
+            let len, iterValue, depValue, step, iterSign, depSign;
 
             var reverse = Math.abs(delx) < Math.abs(dely);
             if (reverse) {
@@ -29,18 +33,19 @@ export class VuAlgorithm implements IAlgorithm {
                 depValue = y1;
             }
             len = Math.abs(delx);
-            step = Math.abs(dely / delx);
+            step = dely / Math.abs(delx);
             iterSign = Math.sign(delx);
             depSign = Math.sign(dely);
             let iterNumber = len;
 
-            let e = depValue + step * depSign;
-
+            let e = depValue + step;
+            
             if (pixelsNumber && pixelsNumber <= len && pixelsNumber >= 0) {
                 iterNumber = pixelsNumber;
             }
-
             for (var i = 0; i <= iterNumber; i++) {
+                drawFunc({ x: depValue, y: iterValue });
+
                 // if (reverse) {
                 //     drawFunc({ x: depValue, y: iterValue });
                 // } else {
@@ -55,5 +60,15 @@ export class VuAlgorithm implements IAlgorithm {
             }
 
         }
+        return table;
+    }
+    getTableColumns(): string[] {
+        return [
+            'X',
+            'Y',
+            'depValue',
+            'iterValue',
+            'error'
+        ];
     }
 }
