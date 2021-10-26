@@ -43,8 +43,6 @@ export class BresenhamAlgorithm implements IAlgorithm {
         table.push({
           X: depValue,
           Y: iterValue,
-          depValue: depValue,
-          iterValue: iterValue,
           error: e
         });
       } else {
@@ -73,8 +71,6 @@ export class BresenhamAlgorithm implements IAlgorithm {
     return [
       'X',
       'Y',
-      'depValue',
-      'iterValue',
       'error'
     ];
   }
