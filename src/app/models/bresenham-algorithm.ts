@@ -29,7 +29,7 @@ export class BresenhamAlgorithm implements IAlgorithm {
     depSign = Math.sign(dely);
     let iterNumber = len;
 
-    let e = 2 * dely - delx;
+    let e = 2 * Math.abs(dely) - Math.abs(delx);
 
     if (pixelsNumber && pixelsNumber <= len && pixelsNumber >= 0) {
       iterNumber = pixelsNumber;
