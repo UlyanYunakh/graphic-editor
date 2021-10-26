@@ -60,14 +60,20 @@ export class CanvasService {
     }
   }
 
-  fillPixel(x: number, y: number): void {
+  fillPixel(x: number, y: number, color?: string): void {
     if (this._context) {
+      if (color) {
+        this._context.fillStyle = color;
+      }
+
       this._context.fillRect(
         x * this._pixelSize,
         y * this._pixelSize,
         this._pixelSize,
         this._pixelSize
       );
+
+      this._context.restore();
     }
   }
 

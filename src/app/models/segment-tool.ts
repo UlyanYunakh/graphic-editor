@@ -30,10 +30,11 @@ export class SegmentTool implements ITool {
     return this.algorithm.compute(args, this.drawOnCanvas, pixelsNumber);
   }
 
-  private drawOnCanvas = (point: IPoint): void => {
+  private drawOnCanvas = (point: IPoint, color?: string): void => {
     this.canvasService.fillPixel(
       Math.round(point.x),
-      Math.round(point.y)
+      Math.round(point.y),
+      color
     );
   }
 }
