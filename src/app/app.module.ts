@@ -19,6 +19,7 @@ import { FooterComponent } from './footer/footer.component';
 import { ToolBarComponent } from './tool-bar/tool-bar.component';
 import { ObjectPropertyComponent } from './object-property/object-property.component';
 import { CanvasComponent } from './canvas/canvas.component';
+import { DebugComponent } from './debug/debug.component';
 
 @NgModule({
   declarations: [
@@ -28,7 +29,8 @@ import { CanvasComponent } from './canvas/canvas.component';
     FooterComponent,
     ToolBarComponent,
     ObjectPropertyComponent,
-    CanvasComponent
+    CanvasComponent,
+    DebugComponent
   ],
   imports: [
     BrowserModule,

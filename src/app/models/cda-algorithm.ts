@@ -16,7 +16,7 @@ export class CDAAlgorithm implements IAlgorithm {
     let dy = (y2 - y1) / len;
 
     let iterNumber = len;
-    if (pixelsNumber && pixelsNumber <= len && pixelsNumber >= 0) {
+    if (pixelsNumber != undefined && pixelsNumber <= len && pixelsNumber >= 0) {
       iterNumber = pixelsNumber;
     }
 
