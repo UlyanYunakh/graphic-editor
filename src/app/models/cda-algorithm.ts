@@ -1,9 +1,9 @@
-import { IAlgorithm } from "../interfaces/ialgorithm";
+import { IAlgResult, IAlgorithm } from "../interfaces/ialgorithm";
 
 export class CDAAlgorithm implements IAlgorithm {
   readonly name = 'ЦДА';
 
-  compute(args: any[], drawFunc: Function, pixelsNumber?: number): any[] {
+  compute(args: any[], drawFunc: Function, pixelsNumber?: number): IAlgResult {
     let table: any[] = [];
 
     let x1 = args[0].x,
@@ -32,7 +32,10 @@ export class CDAAlgorithm implements IAlgorithm {
       y1 = y1 + dy;
     }
 
-    return table;
+    return {
+      table: table,
+      pixelNumber: len
+    };
   }
 
   getTableColumns(): string[] {

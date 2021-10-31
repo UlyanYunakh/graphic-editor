@@ -1,9 +1,9 @@
-import { IAlgorithm } from "../interfaces/ialgorithm";
+import { IAlgorithm, IAlgResult } from "../interfaces/ialgorithm";
 
 export class BresenhamAlgorithm implements IAlgorithm {
   readonly name = 'Алгоритм Брезенхама';
 
-  compute(args: any[], drawFunc: Function, pixelsNumber?: number): any[] {
+  compute(args: any[], drawFunc: Function, pixelsNumber?: number): IAlgResult {
     let table: any[] = [];
 
     let x1 = args[0].x,
@@ -33,7 +33,7 @@ export class BresenhamAlgorithm implements IAlgorithm {
 
     let e = 2 * Math.abs(dely) - Math.abs(delx);
 
-    if (pixelsNumber && pixelsNumber <= len && pixelsNumber >= 0) {
+    if (pixelsNumber != undefined && pixelsNumber <= len && pixelsNumber >= 0) {
       iterNumber = pixelsNumber;
     }
 
@@ -50,8 +50,6 @@ export class BresenhamAlgorithm implements IAlgorithm {
         table.push({
           X: iterValue,
           Y: depValue,
-          depValue: depValue,
-          iterValue: iterValue,
           error: e
         });
       }
@@ -61,10 +59,12 @@ export class BresenhamAlgorithm implements IAlgorithm {
       }
       iterValue += 1 * iterSign;
       e += step;
-
     }
 
-    return table;
+    return {
+      table: table,
+      pixelNumber: len
+    };
   }
 
   getTableColumns(): string[] {

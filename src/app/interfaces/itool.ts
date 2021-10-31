@@ -1,4 +1,5 @@
 import { IAlgorithm } from "./ialgorithm";
+import { IObject } from "./iobject";
 
 export interface IStep {
   info: string;
@@ -17,5 +18,5 @@ export interface ITool {
   argsCount: number;
   steps: IStep[];
   
-  draw(args: any[], pixels?: number): any[];
+  draw(args: any[], pixels?: number): IObject;
 }

@@ -10,7 +10,7 @@ import { ITool } from '../interfaces/itool';
 export class ToolService {
   newObjectSbj: Subject<IObject> = new Subject();
 
-  private _nextArgs: any[] = [];
+  private _currArgs: any[] = [];
   private _currStep: number = 0;
   private _currArgType: number = -1;
 
@@ -38,7 +38,7 @@ export class ToolService {
     this._tool = tool;
     this._toolSbj.next(this._tool);
 
-    this._nextArgs = [];
+    this._currArgs = [];
     this._currStep = 0;
     this._currArgType = -1
 
@@ -54,61 +54,25 @@ export class ToolService {
   }
 
   drawPixels(pixelsNumber: number): void {
-    var table = this._tool.draw(this._currArgsOnCanvas, pixelsNumber);
-    this.newObjectSbj.next({
-      name: `${this._tool.name} ${this._tool.algorithm.name}`,
-      args: [
-        {
-          x: this._currArgsOnCanvas[0].x,
-          y: this._currArgsOnCanvas[0].y,
-          type: 0,
-          name: 'Начальная точка'
-        },
-        {
-          x: this._currArgsOnCanvas[1].x,
-          y: this._currArgsOnCanvas[1].y,
-          type: 0,
-          name: 'Конечная точка'
-        },
-      ],
-      tableColumns: this._tool.algorithm.getTableColumns(),
-      table: table
-    });
+    var result = this._tool.draw(this._currArgsOnCanvas, pixelsNumber);
+    this.newObjectSbj.next(result);
   }
 
   private startShowingSteps(): void {
     this._argSbj.subscribe(arg => {
       // add arg if type is okey
       if (arg.type == this._currArgType) {
-        this._nextArgs.push(arg.value);
+        this._currArgs.push(arg.value);
         this._currStep++;
       }
 
       // draw if all args
-      if (this._nextArgs.length == this._tool.argsCount) {
-        var table = this._tool.draw(this._nextArgs);
-        this.newObjectSbj.next({
-          name: `${this._tool.name} ${this._tool.algorithm.name}`,
-          args: [
-            {
-              x: this._nextArgs[0].x,
-              y: this._nextArgs[0].y,
-              type: 0,
-              name: 'Начальная точка'
-            },
-            {
-              x: this._nextArgs[1].x,
-              y: this._nextArgs[1].y,
-              type: 0,
-              name: 'Конечная точка'
-            },
-          ],
-          tableColumns: this._tool.algorithm.getTableColumns(),
-          table: table
-        });
+      if (this._currArgs.length == this._tool.argsCount) {
+        var result = this._tool.draw(this._currArgs);
+        this.newObjectSbj.next(result);
 
-        this._currArgsOnCanvas = this._nextArgs;
-        this._nextArgs = [];
+        this._currArgsOnCanvas = this._currArgs;
+        this._currArgs = [];
         this._currStep = 0;
         this._currArgType = -1;
       }

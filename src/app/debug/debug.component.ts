@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Input, OnChanges, OnInit } from '@angular/core';
 import { ToolService } from '../services/tool.service';
 
 @Component({
@@ -7,25 +7,39 @@ import { ToolService } from '../services/tool.service';
   styleUrls: ['./debug.component.css']
 })
 export class DebugComponent {
-  currPixelNumber = 0;
+  @Input() pixelNumber = -1;
+  @Input() set isNew(value: boolean) {
+    if (value) {
+      this.currPixelNumber = -1;
+    }
+  };
+  currPixelNumber = -1;
 
   constructor(
     private _tool: ToolService
   ) { }
 
   forward(): void {
-    this.currPixelNumber++;
+    this.currPixelNumber = this.currPixelNumber >= this.pixelNumber ? this.pixelNumber : this.currPixelNumber + 1;
     this.draw();
   }
 
   back(): void {
-    this.currPixelNumber--;
+    this.currPixelNumber = this.currPixelNumber <= 0 ? 0 : this.currPixelNumber - 1;
     this.draw();
   }
 
   toEnd(): void {
-    this.currPixelNumber = -1;
+    this.currPixelNumber = this.pixelNumber;
     this.draw();
+  }
+
+  isEnd(): boolean {
+    return this.currPixelNumber == this.pixelNumber;
+  }
+
+  isStart(): boolean {
+    return this.currPixelNumber <= 0;
   }
 
   private draw(): void {
