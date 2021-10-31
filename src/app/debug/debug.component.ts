@@ -19,6 +19,15 @@ export class DebugComponent {
     private _tool: ToolService
   ) { }
 
+  keyDownEvent(event: KeyboardEvent): void {
+    if(event.key == "ArrowLeft"){
+      this.back();
+    }
+    else if (event.key == "ArrowRight"){
+      this.forward();
+    }
+  }
+
   forward(): void {
     this.currPixelNumber = this.currPixelNumber >= this.pixelNumber ? this.pixelNumber : this.currPixelNumber + 1;
     this.draw();
