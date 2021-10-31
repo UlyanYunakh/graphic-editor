@@ -1,5 +1,4 @@
 import { Component } from '@angular/core';
-import { ITool } from '../interfaces/itool';
 import { BresenhamAlgorithm } from '../models/bresenham-algorithm';
 import { CDAAlgorithm } from '../models/cda-algorithm';
 import { SegmentTool } from '../models/segment-tool';
@@ -12,31 +11,31 @@ import { ToolService } from '../services/tool.service';
   styleUrls: ['./tool-bar.component.css']
 })
 export class ToolBarComponent {
-  tool: ITool | undefined;
 
   constructor(
     private _toolService: ToolService,
     private _canvasService: CanvasService
   ) { }
 
-  compareWithCurrToolId(id: number): boolean {
-    return this.tool ? this.tool.id == id : false;
-  }
-
   selectSegmentTool(name: string): void {
+    let tool;
     switch (name) {
       case 'CDA':
-        this.tool = new SegmentTool(new CDAAlgorithm(), this._canvasService);
-        this.setTool(this.tool);
+        tool = new SegmentTool(new CDAAlgorithm(), this._canvasService);
+        this._toolService.setTool = tool;
         break;
       case 'BRESENHAM':
-        this.tool = new SegmentTool(new BresenhamAlgorithm(), this._canvasService);
-        this.setTool(this.tool);
+        tool = new SegmentTool(new BresenhamAlgorithm(), this._canvasService);
+        this._toolService.setTool = tool;
         break;
       default:
-        this.tool = new SegmentTool(new CDAAlgorithm(), this._canvasService);
-        this.setTool(this.tool);
+        tool = new SegmentTool(new CDAAlgorithm(), this._canvasService);
+        this._toolService.setTool = tool;
     }
+  }
+
+  clearCanvas(): void {
+    this._canvasService.clearCanvas();
   }
 
   selectPixelSize(size: string): void {
@@ -58,9 +57,5 @@ export class ToolBarComponent {
         this._canvasService.pixelSize = 15;
         break;
     }
-  }
-
-  private setTool(tool: ITool): void {
-    this._toolService.setTool = tool;
   }
 }
