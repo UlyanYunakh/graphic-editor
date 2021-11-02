@@ -38,25 +38,40 @@ export class VuAlgorithm implements IAlgorithm {
             depSign = Math.sign(dely);
             let iterNumber = len;
 
-            let e = depValue + step;
-            
+            let e = depValue + Math.abs(step);
+            let alpha;
+
             if (pixelsNumber && pixelsNumber <= len && pixelsNumber >= 0) {
                 iterNumber = pixelsNumber;
             }
             for (var i = 0; i <= iterNumber; i++) {
-                drawFunc({ x: depValue, y: iterValue });
-
-                // if (reverse) {
-                //     drawFunc({ x: depValue, y: iterValue });
-                // } else {
-                //     drawFunc({ x: iterValue, y: depValue });
-                // }
-                // if (e >= 0) {
-                //     e -= one;
-                //     depValue += 1 * depSign;
-                // }
-                // iterValue += 1 * iterSign;
-                // e += step;
+                alpha = e - Math.floor(e);
+                depValue = Math.floor(e);
+                if (reverse) {
+                    drawFunc({ x: depValue, y: iterValue }, 1 - alpha);
+                    drawFunc({ x: depValue, y: iterValue + 1 * depSign }, alpha);
+                    table.push({
+                        X1: depValue,
+                        Y1: iterValue,
+                        A1: 1 - alpha,
+                        X2: depValue,
+                        Y2: iterValue + 1 * depSign,
+                        A2: alpha
+                    });
+                } else {
+                    drawFunc({ x: iterValue, y: depValue }, 1 - alpha);
+                    drawFunc({ x: iterValue + 1 * depSign, y: depValue }, alpha);
+                    table.push({
+                        X1: iterValue,
+                        Y1: depValue,
+                        A1: 1 - alpha,
+                        X2: iterValue + 1 * depSign,
+                        Y2: depValue,
+                        A2: alpha
+                    });
+                }
+                e += step;
+                iterValue += 1 * iterSign;
             }
 
         }
@@ -64,11 +79,12 @@ export class VuAlgorithm implements IAlgorithm {
     }
     getTableColumns(): string[] {
         return [
-            'X',
-            'Y',
-            'depValue',
-            'iterValue',
-            'error'
+            'X1',
+            'Y1',
+            'A1',
+            'X2',
+            'Y2',
+            'A2'
         ];
     }
 }
