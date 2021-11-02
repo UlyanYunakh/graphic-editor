@@ -16,15 +16,7 @@ export class SegmentTool implements ITool {
   constructor(
     public algorithm: IAlgorithm,
     private canvasService: CanvasService
-  ) {
-    this.canvasService.clearCanvas();
-
-    this.draw([{ x: 4, y: 1 }, { x: 4, y: 8 }]);
-    this.draw([{ x: 10, y: 4 }, { x: 14, y: 1 }]);
-    this.draw([{ x: 17, y: 1 }, { x: 28, y: 3 }]);
-
-    this.draw([{ x: 8, y: 20 }, { x: 2, y: 20 }]);
-  }
+  ) { }
 
   draw(args: any[], pixelsNumber?: number): IObject {
     if (pixelsNumber != undefined) this.canvasService.clearCanvas();
