@@ -3,6 +3,7 @@ import { ITool } from '../interfaces/itool';
 import { BresenhamAlgorithm } from '../models/bresenham-algorithm';
 import { CDAAlgorithm } from '../models/cda-algorithm';
 import { SegmentTool } from '../models/segment-tool';
+import { VuAlgorithm } from '../models/vu-algorithm';
 import { CanvasService } from '../services/canvas.service';
 import { ToolService } from '../services/tool.service';
 
@@ -31,6 +32,10 @@ export class ToolBarComponent {
         break;
       case 'BRESENHAM':
         this.tool = new SegmentTool(new BresenhamAlgorithm(), this._canvasService);
+        this.setTool(this.tool);
+        break;
+      case 'VU':
+        this.tool = new SegmentTool(new VuAlgorithm(), this._canvasService);
         this.setTool(this.tool);
         break;
       default:
