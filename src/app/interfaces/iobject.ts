@@ -3,4 +3,6 @@ export interface IObject {
   args: any[];
   tableColumns: string[];
   table: any[];
+  pixelNumber: number;
+  isNew: boolean;
 }
