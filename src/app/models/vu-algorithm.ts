@@ -4,7 +4,7 @@ import { CDAAlgorithm } from "./cda-algorithm";
 
 export class VuAlgorithm implements IAlgorithm {
 
-    readonly name = 'Vu algorithm';
+    readonly name = 'Алгоритм Ву';
 
     compute(args: any[], drawFunc: Function, pixelsNumber?: number): IAlgResult {
         let table: any[] = [];
