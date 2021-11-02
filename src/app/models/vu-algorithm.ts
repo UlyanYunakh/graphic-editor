@@ -48,11 +48,7 @@ export class VuAlgorithm implements IAlgorithm {
             }
             for (var i = 0; i <= iterNumber; i++) {
                 alpha = e - Math.floor(e);
-                if(depSign<0){
-                    depValue = Math.floor(e);
-                }else{
-                    depValue = Math.ceil(e);
-                }
+                depValue = Math.floor(e);
                 a1 = 1-alpha;
                 a2 = alpha;
                 if(depSign<0){
@@ -65,20 +61,19 @@ export class VuAlgorithm implements IAlgorithm {
                         X1: depValue,
                         Y1: iterValue,
                         A1: a1,
-                        X2: depValue,
-                        Y2: iterValue + 1 * depSign,
+                        X2: depValue + 1 * depSign,
+                        Y2: iterValue,
                         A2: a2
                     });
                 } else {
-                    
                     drawFunc({ x: iterValue, y: depValue }, a1);
                     drawFunc({ x: iterValue , y: depValue + 1 * depSign}, a2);
                     table.push({
                         X1: iterValue,
                         Y1: depValue,
                         A1: a1,
-                        X2: iterValue + 1 * depSign,
-                        Y2: depValue,
+                        X2: iterValue,
+                        Y2: depValue + 1 * depSign,
                         A2: a2
                     });
                 }
