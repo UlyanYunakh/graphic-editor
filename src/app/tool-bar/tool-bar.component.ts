@@ -30,8 +30,8 @@ export class ToolBarComponent {
         this._toolService.setTool = tool;
         break;
       case 'VU':
-        this.tool = new SegmentTool(new VuAlgorithm(), this._canvasService);
-        this.setTool(this.tool);
+        tool = new SegmentTool(new VuAlgorithm(), this._canvasService);
+        this._toolService.setTool = tool;
         break;
       default:
         tool = new SegmentTool(new CDAAlgorithm(), this._canvasService);

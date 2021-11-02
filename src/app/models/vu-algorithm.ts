@@ -1,4 +1,4 @@
-import { IAlgorithm } from "../interfaces/ialgorithm";
+import { IAlgorithm, IAlgResult } from "../interfaces/ialgorithm";
 import { BresenhamAlgorithm } from "./bresenham-algorithm";
 import { CDAAlgorithm } from "./cda-algorithm";
 
@@ -6,7 +6,7 @@ export class VuAlgorithm implements IAlgorithm {
 
     readonly name = 'Vu algorithm';
 
-    compute(args: any[], drawFunc: Function, pixelsNumber?: number): any[] {
+    compute(args: any[], drawFunc: Function, pixelsNumber?: number): IAlgResult {
         let table: any[] = [];
 
         let x1 = args[0].x,
@@ -16,12 +16,13 @@ export class VuAlgorithm implements IAlgorithm {
 
         let delx = x2 - x1;
         let dely = y2 - y1;
+        let len = 0;
 
         if (Math.abs(delx) == Math.abs(dely) || (delx == 0 || dely == 0)) {
             let cda = new CDAAlgorithm();
-            table = cda.compute(args, drawFunc, pixelsNumber);
+            table = cda.compute(args, drawFunc, pixelsNumber).table;
         } else {
-            let len, iterValue, depValue, step, iterSign, depSign;
+            let iterValue, depValue, step, iterSign, depSign;
 
             var reverse = Math.abs(delx) < Math.abs(dely);
             if (reverse) {
@@ -41,7 +42,7 @@ export class VuAlgorithm implements IAlgorithm {
             let e = depValue + Math.abs(step);
             let alpha;
 
-            if (pixelsNumber && pixelsNumber <= len && pixelsNumber >= 0) {
+            if (pixelsNumber != undefined && pixelsNumber <= len && pixelsNumber >= 0) {
                 iterNumber = pixelsNumber;
             }
             for (var i = 0; i <= iterNumber; i++) {
@@ -75,7 +76,10 @@ export class VuAlgorithm implements IAlgorithm {
             }
 
         }
-        return table;
+        return {
+            table: table,
+            pixelNumber: len
+        };
     }
     getTableColumns(): string[] {
         return [
