@@ -63,7 +63,8 @@ export class CanvasService {
   fillPixel(x: number, y: number, alpha?: number): void {
     if (this._context) {
       this._context.save();
-      if (alpha) {
+
+      if (alpha != undefined) {
         this._context.fillStyle = `rgba(0,0,0,${alpha})`;
       }
 

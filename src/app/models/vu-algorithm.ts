@@ -41,34 +41,45 @@ export class VuAlgorithm implements IAlgorithm {
 
             let e = depValue + Math.abs(step);
             let alpha;
+            let a1, a2;
 
             if (pixelsNumber != undefined && pixelsNumber <= len && pixelsNumber >= 0) {
                 iterNumber = pixelsNumber;
             }
             for (var i = 0; i <= iterNumber; i++) {
                 alpha = e - Math.floor(e);
-                depValue = Math.floor(e);
+                if(depSign<0){
+                    depValue = Math.floor(e);
+                }else{
+                    depValue = Math.ceil(e);
+                }
+                a1 = 1-alpha;
+                a2 = alpha;
+                if(depSign<0){
+                 [a1,a2]=[a2,a1];   
+                }
                 if (reverse) {
-                    drawFunc({ x: depValue, y: iterValue }, 1 - alpha);
-                    drawFunc({ x: depValue, y: iterValue + 1 * depSign }, alpha);
+                    drawFunc({ x: depValue, y: iterValue }, a1);
+                    drawFunc({ x: depValue, y: iterValue + 1 * depSign }, a2);
                     table.push({
                         X1: depValue,
                         Y1: iterValue,
-                        A1: 1 - alpha,
+                        A1: a1,
                         X2: depValue,
                         Y2: iterValue + 1 * depSign,
-                        A2: alpha
+                        A2: a2
                     });
                 } else {
-                    drawFunc({ x: iterValue, y: depValue }, 1 - alpha);
-                    drawFunc({ x: iterValue + 1 * depSign, y: depValue }, alpha);
+                    
+                    drawFunc({ x: iterValue, y: depValue }, a1);
+                    drawFunc({ x: iterValue , y: depValue + 1 * depSign}, a2);
                     table.push({
                         X1: iterValue,
                         Y1: depValue,
-                        A1: 1 - alpha,
+                        A1: a1,
                         X2: iterValue + 1 * depSign,
                         Y2: depValue,
-                        A2: alpha
+                        A2: a2
                     });
                 }
                 e += step;
