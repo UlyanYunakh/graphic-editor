@@ -60,7 +60,7 @@ export class VuAlgorithm implements IAlgorithm {
                 }
                 if (reverse) {
                     drawFunc({ x: depValue, y: iterValue }, a1);
-                    drawFunc({ x: depValue, y: iterValue + 1 * depSign }, a2);
+                    drawFunc({ x: depValue + 1 * depSign , y: iterValue}, a2);
                     table.push({
                         X1: depValue,
                         Y1: iterValue,
