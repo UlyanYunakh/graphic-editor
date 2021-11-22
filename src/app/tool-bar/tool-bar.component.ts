@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { BresenhamAlgorithm } from '../models/bresenham-algorithm';
 import { CDAAlgorithm } from '../models/cda-algorithm';
+import { CircleBresenhem } from '../models/ellipse-algorithm';
 import { SegmentTool } from '../models/segment-tool';
 import { VuAlgorithm } from '../models/vu-algorithm';
 import { CanvasService } from '../services/canvas.service';
@@ -31,6 +32,10 @@ export class ToolBarComponent {
         break;
       case 'VU':
         tool = new SegmentTool(new VuAlgorithm(), this._canvasService);
+        this._toolService.setTool = tool;
+        break;
+      case 'ELLIPSE':
+        tool = new SegmentTool(new CircleBresenhem(), this._canvasService);
         this._toolService.setTool = tool;
         break;
       default:

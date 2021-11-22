@@ -1,7 +1,5 @@
 import { IAlgorithm, IAlgResult } from "../interfaces/ialgorithm";
 
-import { CDAAlgorithm } from "./cda-algorithm";
-
 export class CircleBresenhem implements IAlgorithm {
 
     readonly name = 'Алгоритм Брезенхема для окружности';
