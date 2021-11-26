@@ -1,5 +1,5 @@
 import { IAlgorithm, IAlgResult } from "../interfaces/ialgorithm";
-import { BresenhamAlgorithm } from "./bresenham-algorithm";
+
 import { CDAAlgorithm } from "./cda-algorithm";
 
 export class VuAlgorithm implements IAlgorithm {
@@ -52,7 +52,7 @@ export class VuAlgorithm implements IAlgorithm {
                 a1 = 1-alpha;
                 a2 = alpha;
                 if(depSign<0){
-                 [a1,a2]=[a2,a1];   
+                 [a1,a2]=[a2,a1];
                 }
                 if (reverse) {
                     drawFunc({ x: depValue, y: iterValue }, a1);

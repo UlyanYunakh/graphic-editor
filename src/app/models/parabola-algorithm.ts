@@ -1,6 +1,6 @@
 import { IAlgorithm, IAlgResult } from "../interfaces/ialgorithm";
 
-export class EllipseBresenhem implements IAlgorithm {
+export class ParabolaBresenhem implements IAlgorithm {
 
     readonly name = 'Алгоритм Брезенхема для параболы';
 
@@ -14,8 +14,8 @@ export class EllipseBresenhem implements IAlgorithm {
             y2 = args[1].y;
 
 
-        let x = (x1+x2)/2;
-		let y = y1;
+        let x = 0;
+		let y = 20;
         let a = 1;
 
 		let delta = 1 - 2 * a;

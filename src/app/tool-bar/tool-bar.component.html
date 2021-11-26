@@ -13,8 +13,20 @@
       <button mat-menu-item (click)="selectSegmentTool('VU')">
         <span>Алгоритм Ву</span>
       </button>
+      <button mat-menu-item (click)="selectSegmentTool('CIRCLE')">
+        <span>Окружность</span>
+      </button>
       <button mat-menu-item (click)="selectSegmentTool('ELLIPSE')">
-        <span>Окружность Брезенхама</span>
+        <span>Эллипс</span>
+      </button>
+      <button mat-menu-item (click)="selectSegmentTool('HYPERBOLA')">
+        <span>Гиппербола</span>
+      </button>
+      <button mat-menu-item (click)="selectSegmentTool('PARABOLA')">
+        <span>Параболла</span>
+      </button>
+      <button mat-menu-item (click)="selectSegmentTool('ERMIT')">
+        <span>"Эрмит"</span>
       </button>
     </mat-menu>
   </ng-container>

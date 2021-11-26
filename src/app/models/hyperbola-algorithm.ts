@@ -1,6 +1,6 @@
 import { IAlgorithm, IAlgResult } from "../interfaces/ialgorithm";
 
-export class EllipseBresenhem implements IAlgorithm {
+export class HyperbolaBresenhem implements IAlgorithm {
 
     readonly name = 'Алгоритм Брезенхема для гиперболы';
 

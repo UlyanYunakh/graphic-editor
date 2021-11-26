@@ -1,7 +1,13 @@
 import { Component } from '@angular/core';
+import { BSpline } from '../models/b-spline-algorithm';
+import { Bezie } from '../models/bezie-algorithm';
 import { BresenhamAlgorithm } from '../models/bresenham-algorithm';
 import { CDAAlgorithm } from '../models/cda-algorithm';
+import { EllipseBresenhem } from '../models/el-algorithm';
 import { CircleBresenhem } from '../models/ellipse-algorithm';
+import { Ermith } from '../models/ermith-algorithm';
+import { HyperbolaBresenhem } from '../models/hyperbola-algorithm';
+import { ParabolaBresenhem } from '../models/parabola-algorithm';
 import { SegmentTool } from '../models/segment-tool';
 import { VuAlgorithm } from '../models/vu-algorithm';
 import { CanvasService } from '../services/canvas.service';
@@ -35,7 +41,23 @@ export class ToolBarComponent {
         this._toolService.setTool = tool;
         break;
       case 'ELLIPSE':
+        tool = new SegmentTool(new EllipseBresenhem(), this._canvasService);
+        this._toolService.setTool = tool;
+        break;
+      case 'CIRCLE':
         tool = new SegmentTool(new CircleBresenhem(), this._canvasService);
+        this._toolService.setTool = tool;
+        break;
+      case 'HYPERBOLA':
+        tool = new SegmentTool(new HyperbolaBresenhem(), this._canvasService);
+        this._toolService.setTool = tool;
+        break;
+      case 'PARABOLA':
+        tool = new SegmentTool(new ParabolaBresenhem(), this._canvasService);
+        this._toolService.setTool = tool;
+        break;
+      case 'ERMIT':
+        tool = new SegmentTool(new BSpline(), this._canvasService);
         this._toolService.setTool = tool;
         break;
       default:
