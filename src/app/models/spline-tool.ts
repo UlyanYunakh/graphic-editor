@@ -3,10 +3,9 @@ import { IObject } from "../interfaces/iobject";
 import { IPoint, IStep, ITool } from "../interfaces/itool";
 import { CanvasService } from "../services/canvas.service";
 import { ArgTypes } from "./arg-types";
-import { HermiteAlgorithm } from "./hermite-algorithm";
 
-export class HermiteTool implements ITool {
-  readonly name = 'Сплайн Эрмита';
+export class SplineTool implements ITool {
+  readonly name = 'Кривая';
   readonly argsCount = 4;
   readonly steps: IStep[] = [
     { info: 'Выберите точку 1', type: ArgTypes.point },
@@ -15,9 +14,8 @@ export class HermiteTool implements ITool {
     { info: 'Выберите точку 4', type: ArgTypes.point }
   ];
 
-  public algorithm: IAlgorithm = new HermiteAlgorithm();
-
   constructor(
+    public algorithm: IAlgorithm,
     private canvasService: CanvasService
   ) { }
 
@@ -27,7 +25,7 @@ export class HermiteTool implements ITool {
     let argResult = this.algorithm.compute(args, this.drawOnCanvas, pixelsNumber);
 
     return {
-      name: `${this.name} ${this.algorithm.name}`,
+      name: `${this.name}: ${this.algorithm.name}`,
       args: [
         {
           x: args[0].x,

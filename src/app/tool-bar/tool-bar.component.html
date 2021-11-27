@@ -35,6 +35,9 @@
     <button #segmentBtn="matButton" [matMenuTriggerFor]="lab2Menu" mat-icon-button color="accent"
       title="Отрезок">3</button>
     <mat-menu #lab2Menu="matMenu">
+      <button mat-menu-item (click)="selectTool('BEZIER')">
+        <span>Кривая Безье</span>
+      </button>
       <button mat-menu-item (click)="selectTool('B_SPLINE')">
         <span>Б-сплайн</span>
       </button>

@@ -24,7 +24,7 @@ export class SegmentTool implements ITool {
     let argResult = this.algorithm.compute(args, this.drawOnCanvas, pixelsNumber);
 
     return {
-      name: `${this.name} ${this.algorithm.name}`,
+      name: `${this.name}: ${this.algorithm.name}`,
       args: [
         {
           x: args[0].x,

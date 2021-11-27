@@ -13,9 +13,9 @@ export class BSpline implements IAlgorithm {
 
         let points: any[] = [];
         points.push(args[0]);
-        points.push({x: 15, y: 47});
-        points.push({x: 34, y: 56});
         points.push(args[1]);
+        points.push(args[2]);
+        points.push(args[3]);
 
         var n = points.length;
 
@@ -36,6 +36,10 @@ export class BSpline implements IAlgorithm {
 				var x = math.subset(r, math.index(0, 0)) / 6; 
 				var y = math.subset(r, math.index(0, 1)) / 6;
 				drawFunc({ x: Math.round(x), y: Math.round(y) });
+                table.push({
+                    X: x,
+                    Y: y
+                });
 				t += step;
 				k++;
 			}

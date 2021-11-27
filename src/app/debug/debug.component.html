@@ -1,4 +1,4 @@
-<div class="debug">
+<div *ngIf="pixelNumber != 0" class="debug">
 
   <button mat-mini-fab color="accent" (click)="back()" (keydown)="keyDownEvent($event)" [disabled]="isStart()" title="Отрисовать меньше пикселей">
     <mat-icon>arrow_back</mat-icon>

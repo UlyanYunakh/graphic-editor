@@ -3,9 +3,9 @@ import { IAlgorithm, IAlgResult } from "../interfaces/ialgorithm";
 
 declare var math: any;
 
-export class Bezie implements IAlgorithm {
+export class BezierAlgorithm implements IAlgorithm {
 
-    readonly name = 'Алгоритм Безье для кривой';
+    readonly name = 'Алгоритм Безье';
 
     compute(args: any[], drawFunc: Function, pixelsNumber?: number): IAlgResult {
         let table: any[] = [];
@@ -13,8 +13,8 @@ export class Bezie implements IAlgorithm {
 
         let p1 = args[0],
             p2 = args[1],
-            p3 = {x: 15, y: 47},
-            p4 = {x: 10, y: 20};
+            p3 = args[2],
+            p4 = args[3];
 
 		var i = 0;
 		var t = 0.0;
