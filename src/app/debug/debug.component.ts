@@ -44,10 +44,12 @@ export class DebugComponent {
   }
 
   isEnd(): boolean {
+    if (this.pixelNumber == 0) return true;
     return this.currPixelNumber == this.pixelNumber;
   }
 
   isStart(): boolean {
+    if (this.pixelNumber == 0) return true;
     return this.currPixelNumber <= 0;
   }
 
