@@ -1,32 +1,45 @@
 <div class="tool-bar">
 
-  <ng-container id="segmentToolButton">
+  <ng-container>
     <button #segmentBtn="matButton" [matMenuTriggerFor]="segmentMenu" mat-icon-button color="accent"
       title="Отрезок">1</button>
     <mat-menu #segmentMenu="matMenu">
-      <button mat-menu-item (click)="selectSegmentTool('CDA')">
+      <button mat-menu-item (click)="selectTool('CDA')">
         <span>ЦДА</span>
       </button>
-      <button mat-menu-item (click)="selectSegmentTool('BRESENHAM')">
+      <button mat-menu-item (click)="selectTool('BRESENHAM')">
         <span>Алгоритм Брезенхама</span>
       </button>
-      <button mat-menu-item (click)="selectSegmentTool('VU')">
+      <button mat-menu-item (click)="selectTool('VU')">
         <span>Алгоритм Ву</span>
       </button>
-      <button mat-menu-item (click)="selectSegmentTool('CIRCLE')">
+      <button mat-menu-item (click)="selectTool('CIRCLE')">
         <span>Окружность</span>
       </button>
-      <button mat-menu-item (click)="selectSegmentTool('ELLIPSE')">
+      <button mat-menu-item (click)="selectTool('ELLIPSE')">
         <span>Эллипс</span>
       </button>
-      <button mat-menu-item (click)="selectSegmentTool('HYPERBOLA')">
+      <button mat-menu-item (click)="selectTool('HYPERBOLA')">
         <span>Гиппербола</span>
       </button>
-      <button mat-menu-item (click)="selectSegmentTool('PARABOLA')">
+      <button mat-menu-item (click)="selectTool('PARABOLA')">
         <span>Параболла</span>
       </button>
-      <button mat-menu-item (click)="selectSegmentTool('ERMIT')">
+      <button mat-menu-item (click)="selectTool('ERMIT')">
         <span>"Эрмит"</span>
+      </button>
+    </mat-menu>
+  </ng-container>
+
+  <ng-container>
+    <button #segmentBtn="matButton" [matMenuTriggerFor]="lab2Menu" mat-icon-button color="accent"
+      title="Отрезок">3</button>
+    <mat-menu #lab2Menu="matMenu">
+      <button mat-menu-item (click)="selectTool('B_SPLINE')">
+        <span>Б-сплайн</span>
+      </button>
+      <button mat-menu-item (click)="selectTool('HERMITE')">
+        <span>Сплайн Эрмита</span>
       </button>
     </mat-menu>
   </ng-container>

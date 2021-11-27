@@ -1,11 +1,10 @@
 import { IAlgorithm, IAlgResult } from "../interfaces/ialgorithm";
 
-
 declare let math: any;
 
-export class Ermith implements IAlgorithm {
+export class HermiteAlgorithm implements IAlgorithm {
 
-    readonly name = 'Алгоритм Эрмита для кривой';
+    readonly name = 'Алгоритм Эрмита';
 
     compute(args: any[], drawFunc: Function, pixelsNumber?: number): IAlgResult {
         let table: any[] = [];
@@ -13,8 +12,8 @@ export class Ermith implements IAlgorithm {
 
         let p1 = args[0],
             p4 = args[1],
-            r1 = {x: 15, y: 47},
-            r4 = {x: 10, y: 20};
+            r1 = args[2],
+            r4 = args[3];
 
 		let i = 0;
 		let t = 0.0;

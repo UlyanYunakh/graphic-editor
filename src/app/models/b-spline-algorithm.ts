@@ -5,7 +5,7 @@ declare var math: any;
 
 export class BSpline implements IAlgorithm {
 
-    readonly name = 'Алгоритм Безье для кривой';
+    readonly name = 'Б-сплайн';
 
     compute(args: any[], drawFunc: Function, pixelsNumber?: number): IAlgResult {
         let table: any[] = [];

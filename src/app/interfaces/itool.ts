@@ -12,7 +12,6 @@ export interface IPoint {
 }
 
 export interface ITool {
-  id: number;
   name: string;
   algorithm: IAlgorithm;
   argsCount: number;

@@ -5,7 +5,8 @@ import { BresenhamAlgorithm } from '../models/bresenham-algorithm';
 import { CDAAlgorithm } from '../models/cda-algorithm';
 import { EllipseBresenhem } from '../models/el-algorithm';
 import { CircleBresenhem } from '../models/ellipse-algorithm';
-import { Ermith } from '../models/ermith-algorithm';
+import { HermiteAlgorithm } from '../models/hermite-algorithm';
+import { HermiteTool } from '../models/hermite-tool';
 import { HyperbolaBresenhem } from '../models/hyperbola-algorithm';
 import { ParabolaBresenhem } from '../models/parabola-algorithm';
 import { SegmentTool } from '../models/segment-tool';
@@ -25,7 +26,7 @@ export class ToolBarComponent {
     private _canvasService: CanvasService
   ) { }
 
-  selectSegmentTool(name: string): void {
+  selectTool(name: string): void {
     let tool;
     switch (name) {
       case 'CDA':
@@ -56,8 +57,12 @@ export class ToolBarComponent {
         tool = new SegmentTool(new ParabolaBresenhem(), this._canvasService);
         this._toolService.setTool = tool;
         break;
-      case 'ERMIT':
+      case 'B_SPLINE':
         tool = new SegmentTool(new BSpline(), this._canvasService);
+        this._toolService.setTool = tool;
+        break;
+      case 'HERMITE':
+        tool = new HermiteTool(this._canvasService);
         this._toolService.setTool = tool;
         break;
       default:
